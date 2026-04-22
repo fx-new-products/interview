@@ -14,7 +14,15 @@ export default defineEventHandler(async (event) => {
   const from = new Date(now - fromDaysAgo * 86400_000)
   const to = new Date(now + toDaysAhead * 86400_000)
 
-  const events = await fetchCalendarEvents(from, to, { query: '[recruit]' })
+  // oauth2-proxy 経由のログインユーザー (X-Email) を優先。dev のダミー email は除外して
+  // NUXT_CALENDAR_ID (.env.local) にフォールバック。前提: refresh_token 所有者が対象
+  // ユーザーのカレンダーに閲覧権限を持っていること (freedom.co.jp 内で共有済み)。
+  const config = useRuntimeConfig()
+  const authEmail = event.context.auth?.email
+  const isDevDummy = authEmail === 'dev@freedom.co.jp'
+  const calendarId = (!isDevDummy && authEmail) || config.calendarId || 'primary'
+
+  const events = await fetchCalendarEvents(from, to, { query: '[recruit]', calendarId })
 
   let created = 0
   let updated = 0

@@ -55,7 +55,7 @@ interview/
 - `.env.local` に以下を設定（`.env.example` 参照）：
   - `BASE_URL` — 本番: `/interview/`、ローカル単独: `/` でも可
   - `NUXT_GOOGLE_CLIENT_ID` / `NUXT_GOOGLE_CLIENT_SECRET` / `NUXT_GOOGLE_REFRESH_TOKEN` — **`~/work/ai-degico/.env` の同名キーをそのままコピー**して使う（freedom.co.jp の共有トークン。新規取得不要）
-  - `NUXT_CALENDAR_ID` — **`k.uesawa@freedom.co.jp`**（上澤さんのカレンダーに `[recruit]` 予定が入る運用のため、`primary` ではなくメールアドレス直指定。ai-degico のトークン所有アカウントに上澤さんのカレンダーが共有済みである前提）
+  - `NUXT_CALENDAR_ID` — **ローカル開発用フォールバック**。本番 (Unified Platform 経由) では oauth2-proxy の `X-Email` をそのまま `calendarId` として使うため、この値は参照されない。ローカルでは `X-Email` が無いので、ここで指定したカレンダー (例: `k.uesawa@freedom.co.jp`) を見る。refresh_token 所有アカウントが対象カレンダーに閲覧権限を持つ前提（freedom.co.jp 内で共有済み）。
 
 AI キー等は Portal 経由ではなく、ここは ai-degico 踏襲で .env 直配置。
 

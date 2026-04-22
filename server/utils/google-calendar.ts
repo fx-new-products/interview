@@ -25,14 +25,14 @@ export type RawCalendarEvent = {
 export async function fetchCalendarEvents(
   from: Date,
   to: Date,
-  opts: { query?: string } = {},
+  opts: { query?: string; calendarId?: string } = {},
 ): Promise<RawCalendarEvent[]> {
   const config = useRuntimeConfig()
   const auth = getOAuth2Client()
   const calendar = google.calendar({ version: 'v3', auth })
 
   const res = await calendar.events.list({
-    calendarId: config.calendarId || 'primary',
+    calendarId: opts.calendarId || config.calendarId || 'primary',
     timeMin: from.toISOString(),
     timeMax: to.toISOString(),
     singleEvents: true,
