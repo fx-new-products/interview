@@ -1,0 +1,40 @@
+{
+  "name": "interview",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build && npm run postbuild:copy-dict",
+    "postbuild:copy-dict": "mkdir -p .output/server/node_modules/kuromoji/dict && cp -r node_modules/kuromoji/dict/* .output/server/node_modules/kuromoji/dict/",
+    "dev": "nuxt dev --dotenv .env.local --port 3119",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "nuxi typecheck",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx server/database/migrate.ts",
+    "db:seed": "tsx server/database/seed.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.2.0",
+    "better-sqlite3": "^12.6.2",
+    "drizzle-orm": "^0.45.1",
+    "googleapis": "^144.0.0",
+    "kuroshiro": "^1.2.0",
+    "kuroshiro-analyzer-kuromoji": "^1.1.0",
+    "nuxt": "^3.21.1",
+    "vue": "latest",
+    "vue-sonner": "^2.0.9"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "drizzle-kit": "^0.31.9",
+    "tsx": "^4.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.0",
+    "vue-tsc": "^2.0.0"
+  }
+}

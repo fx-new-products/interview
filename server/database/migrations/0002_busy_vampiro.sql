@@ -1,0 +1,1 @@
+ALTER TABLE `interviews` ADD `candidate_name` text;

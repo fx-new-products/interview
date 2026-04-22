@@ -1,0 +1,29 @@
+node_modules
+.nuxt
+.output
+.nitro
+.cache
+dist
+
+# env
+.env
+.env.local
+.env.*.local
+
+# DB
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# logs
+logs
+*.log
+
+# IDE
+.vscode
+.idea
+.DS_Store
+
+# Claude Code local settings
+.claude/
